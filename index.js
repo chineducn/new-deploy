@@ -1,15 +1,12 @@
 require('dotenv').config()
 
 const express = require('express');
-// const cors = require('cors')
+const cors = require('cors')
 // const helmet = require('helmet')
 
 const app = express()
 const port = process.env.PORT
 
-app.use(express.json())
-// app.use(helmet())
-// app.use(cors())
 
 const friends = [
     {
@@ -26,10 +23,15 @@ const friends = [
     }
 ]
 
+app.use(express.json())
+// app.use(helmet())
+app.use(cors())
+
+
 app.get('/api/friends', (req, res) => {
-    res.status(200).json(friends)
+    res.json(friends)
 })
 
 app.listen(port, () => {
-    console.log(`listening on port ${port}`)
+    console.log("listening on port " + port)
 })
